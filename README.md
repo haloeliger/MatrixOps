@@ -4,6 +4,6 @@ Traits for abstract matrix multiplication,
 i.e., linear operators on vectors and matrices
 
 
-- Documentation: [haloeliger.github.io/...](https://haloeliger.github.io/MatrixOps/MatrixOps/)
+- Documentation: [haloeliger.github.io/.../MatrixOps/](https://haloeliger.github.io/MatrixOps/MatrixOps/)
 - Download: file `matrixops.rs`
 - Version and dependencies: see `Cargo.toml`
