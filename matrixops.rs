@@ -48,13 +48,14 @@
 //! ```
 //! \
 
-//! **Example:** `vct_y = mat2 * mat1 * vct_x` with abstract `mat1` and `mat2`:
+//! **Example:**
 //!
 //! ```
 //! use oxiblas::prelude::*;
 //! mod matrixops;
 //! use matrixops::*;
 //!
+//! // `vct_y = mat2 * mat1 * vct_x` with abstract `mat1` and `mat2`
 //! fn mult_mult_vct(
 //! 	mat2: &dyn MatrixOps1<f64>,
 //! 	mat1: &dyn MatrixOps1<f64>,
