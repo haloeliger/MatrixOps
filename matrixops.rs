@@ -2,6 +2,8 @@
 //! (i.e., linear operators),
 //! with implementations for generic OxiBLAS matrices. 
 //!
+//! *Oct. 15, 2026, H.-A. L.*
+//! 
 
 //! Only the operators are abstract; 
 //! vector operands and results are slices, matrix operands and results are OxiBLAS matrices. 
@@ -15,7 +17,7 @@
 //! As examples, such implementations are provided for generic matrices and for diagonal matrices.
 //!
 
-//! Trait `MatrixOps1` requires the following methods:
+//! Trait `MatrixOps1` defines the following methods:
 //!
 //! ```text
 //!	nrows:                  number of rows
@@ -32,7 +34,7 @@
 //! ```
 //!
 
-//! Trait `MatrixOps2` requires the following methods:
+//! Trait `MatrixOps2` defines the following methods:
 //! ```text
 //!	mult_mat:                mat_c =  self * mat_b
 //! mult_mat_addto:          mat_c += self * mat_b
@@ -46,41 +48,40 @@
 //! ```
 //! \
 
-//!	**Example:** `vct_c = mat2 * mat1 * vct_b` with abstract `mat1` and `mat2`:
+//! **Example:** `vct_y = mat2 * mat1 * vct_x` with abstract `mat1` and `mat2`:
 //!
 //! ```
 //! use oxiblas::prelude::*;
+//! mod matrixops;
 //! use matrixops::*;
 //!
-//!	fn mult_mult_vct(
-//!		mat1: &dyn MatrixOps1<f64>,
-//!		mat2: &dyn MatrixOps1<f64>,
-//!		vct_b: &[f64],
-//!		vct_c: &mut[f64],
-//!		wsp:   &mut[f64], // workspace with same size as vct_b and vct_c
-//!	) {
-//!		mat1.mult_vct(vct_b, wsp);
-//!		mat2.mult_vct(wsp, vct_c);
-//!	}
+//! fn mult_mult_vct(
+//! 	mat2: &dyn MatrixOps1<f64>,
+//! 	mat1: &dyn MatrixOps1<f64>,
+//! 	vct_x: &[f64],
+//! 	vct_y: &mut[f64],
+//! 	vct_wsp: &mut[f64], // workspace with same size as vct_x and vct_y
+//! ) {
+//! 	mat1.mult_vct(vct_x, vct_wsp);
+//! 	mat2.mult_vct(vct_wsp, vct_y);
+//! }
 //!
 //! let mat_a = Mat::from_rows( &[
 //!    	&[   1.0,   2.0 ],
 //!     &[ 100.0, 200.0 ],
 //!    	]);
-//!
-//!	let mat_b = DiagonalMatrixOps {
+//! let mat_b = DiagonalMatrixOps {
 //!     	diag: &[ 1.0, 30.0 ],
-//!    	};
-//!
-//!	let vct_b = &[ 10.0, 0.1];
-//!	let vct_c = &mut[ 0.0; 2];
-//!	let wsp =   &mut[ 0.0; 2];
-//!
-//!	// vct_c = mat_a * mat_b * vct_b:
-//!	mult_mult_vct( &mat_b, &mat_a.as_ref(), vct_b, vct_c, wsp );
-//!
-//!	// vct_c = mat_b * mat_a * vct_b:
-//!	mult_mult_vct( &mat_a.as_ref(), &mat_b, vct_b, vct_c, wsp );
+//! 	};
+//! let vct_x = &[ 10.0, 0.1];
+//! let vct_y = &mut[ 0.0; 2];
+//! let vct_wsp = &mut[ 0.0; 2];
+//! 
+//! // vct_y = mat_a * mat_b * vct_x:
+//! mult_mult_vct( &mat_a.as_ref(), &mat_b, vct_x, vct_y, vct_wsp );
+//! 
+//! // vct_y = mat_b * mat_a * vct_x:
+//! mult_mult_vct( &mat_b, &mat_a.as_ref(), vct_x, vct_y, vct_wsp );
 //! ```
 
 
