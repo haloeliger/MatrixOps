@@ -5,5 +5,5 @@ i.e., linear operators on vectors and matrices
 
 
 - Documentation: [haloeliger.github.io/MatrixOps/matrixops/](https://haloeliger.github.io/MatrixOps/matrixops/)
-- Download: simply `matrixops.rs`
+- Download: file `matrixops.rs`
 - Version and dependencies: see `Cargo.toml`
